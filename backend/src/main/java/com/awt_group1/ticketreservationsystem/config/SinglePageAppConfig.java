@@ -24,13 +24,13 @@ public class SinglePageAppConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/")
+                .addResourceLocations("classpath:/public/")
                 .resourceChain(false)
                 .addResolver(new PushStateResourceResolver());
     }
 
     private class PushStateResourceResolver implements ResourceResolver {
-        private Resource index = new ClassPathResource("/static/index.html");
+        private Resource index = new ClassPathResource("/public/index.html");
         private List<String> handledExtensions = Arrays.asList("html", "js", "json", "csv", "css", "png", "svg", "eot", "ttf", "woff", "appcache", "jpg", "jpeg", "gif", "ico");
         private List<String> ignoredPaths = Arrays.asList("api");
 

@@ -13,8 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "echo Building frontend && mkdirp build/www && react-scripts ./build/www",
-    "build": "react-scripts ../../../frontend/build",
+    "build": "echo 'Building frontend' && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
