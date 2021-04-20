@@ -37,3 +37,4 @@ out/
 .vscode/
 /frontend/node/
 /lib/
+/frontend/package-lock.json
