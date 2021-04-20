@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'war'
+    id 'java'
+}
+
+group = 'com.AWT_group1'
+version = '0.0.1-Initialization'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('processFrontendResources', Copy) {
+    // Directory containing the artifacts in the frontend project
+    def frontendBuildDir = file("${project(':frontend').buildDir}")
+    // Directory where the frontend artifacts must be copied to be packaged alltogether with the backend by the 'war'
+    // plugin.
+    def frontendResourcesDir = file("${project.buildDir}/resources/main/public")
+
+    group 'Frontend'
+    description 'Process frontend resources'
+    dependsOn project(':frontend').tasks.named('assembleFrontend')
+
+    from frontendBuildDir
+    into frontendResourcesDir
+}
+
+tasks.named('processResources') {
+    dependsOn tasks.named('processFrontendResources')
+}
