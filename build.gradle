@@ -1,7 +1,15 @@
 plugins {
     id 'org.springframework.boot' version '2.4.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.siouan.frontend-jdk11' version '5.0.1'
     id 'java'
+}
+
+frontend {
+    nodeVersion = '15.14.0'
+    assembleScript = 'run build'
+    cleanScript = 'run clean'
+    checkScript = 'run check'
 }
 
 group = 'com.AWT_group1'
