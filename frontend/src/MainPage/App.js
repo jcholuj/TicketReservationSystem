@@ -1,8 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
-// import logo from "./logo.svg";
 import "./App.css";
-import { Layout, Menu, Breadcrumb } from "antd";
+import {Layout, Menu, Breadcrumb, Button} from "antd";
 import { DatePicker } from "antd";
 import UserRecord from "./UserRecord";
 
@@ -38,7 +37,7 @@ function App() {
             </Content>
 
             <Footer style={{ textAlign: "center" }}>
-                Ant Design Â©2018 Created by Ant UED
+                {/*Ant Design Â©2018 Created by Ant UED*/}
             </Footer>
         </Layout>
     );

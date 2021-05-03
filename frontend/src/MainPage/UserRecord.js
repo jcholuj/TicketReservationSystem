@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, InputNumber, Button, Radio, Table } from "antd";
+import {Form, Input, InputNumber, Button, Radio, Table, notification} from "antd";
 import { Component } from "react";
 // import axios from "axios";
 
@@ -111,8 +111,19 @@ class UserRecord extends Component {
         const userRecord = {};
         userRecord.name = this.state.newUser.name;
         userRecord.age = this.state.newUser.age;
-        this.createUserRecord(userRecord);
-        this.fetchUser();
+        if (userRecord.age<18){
+            notification["error"]({
+                message: 'New user not added',
+                description:
+                    `${userRecord.name} ${userRecord.age}`,
+            });
+        } else {
+            notification["success"]({
+                message: 'New user added',
+                description:
+                    `${userRecord.name} ${userRecord.age}`,
+            });
+        }
         this.setState({ editing: false, newUser: { name: "", age: 0 } });
         this.setState({ tableConfiguration: { loading: false } });
     };
@@ -121,6 +132,19 @@ class UserRecord extends Component {
         const userRecord = {};
         userRecord.id = this.state.currentId;
         userRecord.data = this.state.newUser;
+        if (userRecord.age<18){
+            notification["error"]({
+                message: 'New user not added',
+                description:
+                    `${userRecord.name} ${userRecord.age}`,
+            });
+        } else {
+            notification["success"]({
+                message: 'New user added',
+                description:
+                    `${userRecord.name} ${userRecord.age}`,
+            });
+        }
         this.updateUserRecord(userRecord);
         this.setState({ editing: false, newUser: { name: "", age: 0 } });
     };
