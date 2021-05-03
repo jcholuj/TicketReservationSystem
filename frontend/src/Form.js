@@ -42,8 +42,6 @@ class Form extends Component {
         }
     }
 
-    //...
-
     handleSubmit = (event) => {
         event.preventDefault()
         if(!this.state.errcount) {
@@ -60,16 +58,23 @@ class Form extends Component {
     }
 
     render() {
+        const opt = this.props.option
         const inputs = this.props.inputs.map(
-            ({name, placeholder, type, value, className}, index) => (
+            ({name, placeholder, type, value}, index) => (
                 <Input key={index} name={name} placeholder={placeholder} type={type} value={value}
-                       className={type==='submit'? className : ''} handleError={this.handleError} />
+                       option={opt} handleError={this.handleError} />
             )
         )
         const errors = this.renderError()
+        const {option, ...formProps} = this.props
         return (
-            <form {...this.props} onSubmit={this.handleSubmit} ref={fm => {this.form=fm}} >
-                {inputs}
+            <form {...formProps} onSubmit={this.handleSubmit} ref={fm => {this.form=fm}} >
+                <div className={'account-form-fields ' + (opt === 1 ? 'sign-in' : (opt === 2 ? 'sign-up' : 'forgot')) }>
+                    {inputs}
+                </div>
+                <button className='btn-submit-form' type='submit'>
+                    { opt === 1 ? 'Sign in' : (opt === 2 ? 'Sign up' : 'Reset password') }
+                </button>
                 {errors}
             </form>
         )
@@ -77,11 +82,13 @@ class Form extends Component {
 }
 
 Form.propTypes = {
+    className: PropTypes.string,
     name: PropTypes.string,
     action: PropTypes.string,
     method: PropTypes.string,
     inputs: PropTypes.array,
-    error: PropTypes.string
+    error: PropTypes.string,
+    option: PropTypes.number
 }
 
 export default Form
