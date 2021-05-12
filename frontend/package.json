@@ -1,22 +1,26 @@
 {
-  "name": "frontend",
+  "name": "trainy_app_frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "antd": "^4.15.4",
-    "axios": "^0.21.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.1"
+    "@ant-design/icons": "^4.6.1",
+    "@craco/craco": "^5.7.0",
+    "antd": "^4.7.0",
+    "craco-antd": "1.19.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-scripts": "3.4.3"
   },
+  "devDependencies": {
+    "babel-plugin-import": "^1.13.3",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpackbar": "^4.0.0"
+  },
+  "main": "src/index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "echo 'Building frontend' && react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -36,8 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "prop-types": "^15.7.2"
   }
 }
