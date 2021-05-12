@@ -1,0 +1,20 @@
+@import "../general/base.less";
+@bg-path: "../../static/bg-1.jpeg";
+
+@primary-color: @green-6;
+
+.app-content {
+  background-image: url(@bg-path);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  .app-content__backdrop {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(250, 250, 250, 0.75);
+    position: absolute;
+    left: 0;
+  }
+}
