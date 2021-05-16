@@ -36,7 +36,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable().authorizeRequests()
                 .antMatchers(
                         HttpMethod.GET,
-                        "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
+                        "/", "/index*", "/static/**", "/*.json", "/*.js", "/icons/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

@@ -1,8 +1,6 @@
 @import "../general/base.less";
 @bg-path: "../../static/bg-1.jpeg";
 
-@primary-color: @green-6;
-
 .app-content {
   background-image: url(@bg-path);
   background-repeat: no-repeat;
@@ -13,8 +11,82 @@
   .app-content__backdrop {
     height: 100%;
     width: 100%;
-    background-color: rgba(250, 250, 250, 0.75);
+    background-color: rgba(250, 250, 250, 0.8);
     position: absolute;
     left: 0;
   }
+}
+
+.widget-title {
+  margin-top: 70px;
+  text-align: center;
+}
+
+.ant-tabs-top.search-tabs {
+
+  margin-bottom: 24px;
+
+  > .ant-tabs-nav::before {
+    border-bottom: none;
+  }
+
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: @cyan-8;
+  }
+
+  .ant-tabs-tab:hover {
+    color: @cyan-8;
+  }
+
+  .ant-tabs-tab-btn:focus, .ant-tabs-tab-btn:active {
+    color: @cyan-9;
+  }
+
+  .ant-tabs-ink-bar {
+    background: @cyan-8;
+  }
+}
+
+.search-form {
+
+  margin-bottom: 100px;
+
+  .ant-form-item .ant-form-item-control-input-content {
+    flex: none;
+  }
+
+  .stations-input {
+    width: 100%;
+  }
+
+  .ant-form-item-control-input {
+    justify-content: center;
+  }
+
+  .stations-btn-col {
+    text-align: center;
+
+    .anticon svg {
+      transition: transform 1s @ease-out-circ;
+    }
+  }
+}
+
+.ant-picker-datetime-panel {
+
+  .ant-picker-time-panel-column:nth-child(2) {
+
+    .ant-picker-time-panel-cell-disabled {
+      display: none;
+    }
+
+    &:after {
+      height: 0;
+    }
+  }
+}
+
+.modal-vid {
+  max-width: 100%;
+  margin-top: 25px;
 }

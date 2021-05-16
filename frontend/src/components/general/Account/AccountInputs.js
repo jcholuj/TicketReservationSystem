@@ -3,14 +3,10 @@ import {Form, Input, Checkbox} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 
 class AccountInputs extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {type: props.type};
-    }
 
     render() {
-        const type = this.state.type.charAt(0)
-        if (type === 'f') {
+        const option = this.props.option
+        if (option === '3') {
             return (
                 <Form.Item
                     name="email"
@@ -33,40 +29,53 @@ class AccountInputs extends React.Component {
             return (
             <React.Fragment>
                 <Form.Item name="username"
-                    rules={
-                        [{
+                    normalize={(value) => value.replace(/ /g, "_")}
+                    rules={[
+                        {
                             required: true,
                             message: 'Please input your Username!'
-                        }]
-                }>
+                        },
+                ]}>
                     <Input prefix={<UserOutlined/>}
                         placeholder="Username"/>
                 </Form.Item>
                 <Form.Item name="pass"
+                    hasFeedback
                     rules={
                         [{
                             required: true,
                             message: 'Please input your Password!'
                         }]
-                }>
-                    <Input prefix={<LockOutlined/>}
-                        type="password"
+                    }
+                >
+                    <Input.Password prefix={<LockOutlined/>}
                         placeholder="Password"/>
                 </Form.Item>
-                {type === 'r' &&
-                    <Form.Item name="pass-repeat"
-                        rules={
-                            [{
+                {option === '2' &&
+                    <Form.Item
+                        name="pass-repeat"
+                        dependencies={['pass']}
+                        hasFeedback
+                        rules={[
+                            {
                                 required: true,
-                                message: 'Please enter your Password again!'
-                            }]
-                    }>
-                        <Input prefix={<LockOutlined/>}
-                            type="password"
+                                message: 'Please confirm your password!',
+                            },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('pass') === value) {
+                                        return Promise.resolve();
+                                    }
+                                    return Promise.reject(new Error('Entered passwords do not match!'));
+                                },
+                            }),
+                        ]}
+                    >
+                        <Input.Password prefix={<LockOutlined/>}
                             placeholder="Repeat password"/>
                     </Form.Item>
                 }
-                {type === 's' &&
+                {option === '1' &&
                     <Form.Item name="remember" valuePropName="checked">
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
