@@ -71,12 +71,11 @@ class SearchInputs extends React.Component {
         const checkOption1 = this.props.option === "1";
         return(
             <React.Fragment>
-                <Form.Item name="connect_date" 
+                <Form.Item name="connect_date"
                     initialValue={checkOption1 ? this.getTimeAdjustNow() : undefined}>
                     <DatePicker format={dateTimeFormat}
                         disabledTime={this.disabledDateTime}
                         showTime={{ format: 'HH:mm' }}
-                        onChange={this.onTimeChange}
                     />
                 </Form.Item>
                 <Row justify="center">
@@ -90,7 +89,7 @@ class SearchInputs extends React.Component {
                                 }
                                 filterOption={stationInputFilter}
                                 className="stations-input"
-                                onChange={(data) => 
+                                onChange={(data) =>
                                     this.handleAutocompleteChange("connect_orig", data)
                                 }
                                 allowClear
@@ -117,9 +116,9 @@ class SearchInputs extends React.Component {
                                 <AutoComplete options={options}
                                     value={this.state.connect_dest}
                                     placeholder="Destination"
-                                    filterOption={this.stationInputFilter}
+                                    filterOption={stationInputFilter}
                                     className="stations-input"
-                                    onChange={(data) => 
+                                    onChange={(data) =>
                                         this.handleAutocompleteChange("connect_dest", data)
                                     }
                                     allowClear
