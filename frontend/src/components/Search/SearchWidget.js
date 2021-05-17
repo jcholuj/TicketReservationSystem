@@ -2,11 +2,10 @@ import React from "react";
 import {message, Button, Form, Modal, Row, Col, Tabs, Typography } from "antd";
 import {CompassOutlined, EnvironmentOutlined} from '@ant-design/icons';
 import SearchInputs from "./SearchInputs";
-import vid from "../../static/success-1.mp4"
+import moment from 'moment';
 
 const { TabPane } = Tabs;
 const { Title } = Typography;
-const fun = "http://ksi.pwr.edu.pl/fcp/cGBUKOQtTKlQhbx08SlkTUgRLUWRuHQwFDBoIVURNWHVBG1gnBVcoFW8SBDRKHg/109/public/default/staff/rafal_kern.jpg"
 
 class SearchWidget extends React.Component {
     constructor(props) {
@@ -25,29 +24,32 @@ class SearchWidget extends React.Component {
         let noErrors = true;
         if (!inputs.connect_orig ||
             (!inputs.connect_dest && this.state.searchTabOption === '1')) {
-            message.warning('Station selection is not complete!');
+            message.warning('Station selection is not complete!').then();
             noErrors = false
         }
         if (!inputs.connect_date) {
-            message.warning('Date was not selected!');
+            message.warning('Date was not selected!').then();
             noErrors = false
         }
         if (noErrors) {
+            // some useful logic should happen instead of this temporary
+            const { connect_date, ...rest} = inputs
+            const inputsLog = {
+                ...rest, connect_date: moment(connect_date).format()
+            }
+            console.table(inputsLog)
             this.successModal()
+            //TODO
         }
     }
 
     successModal() {
         Modal.info({
-          title: 'This feature will be implemented later 😊',
-          content: (
-            <video autoPlay loop className="modal-vid">
-                <source src={vid} type="video/mp4" />
-            </video>
-          ),
-          onOk() {
-            window.open(fun, '_blank').focus();
-          },
+            title: 'Search query received',
+            content: (
+                <p>Specified parameters are logged in the console.</p>
+            ),
+            onOk() {},
         });
       }
 
@@ -60,7 +62,7 @@ class SearchWidget extends React.Component {
         const searchInputs = <SearchInputs {...searchInputOpts}/>
         return (
             <Row>
-                <Col flex="auto"></Col>
+                <Col flex="auto" />
                 <Col flex="500px">
                     <Title className="widget-title">Browse timetable with ease.</Title>
                     <Form
@@ -105,7 +107,7 @@ class SearchWidget extends React.Component {
                         </Form.Item>
                     </Form>
                 </Col>
-                <Col flex="auto"></Col>
+                <Col flex="auto" />
             </Row>
         )
     }

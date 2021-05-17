@@ -72,7 +72,7 @@ class SearchInputs extends React.Component {
         return(
             <React.Fragment>
                 <Form.Item name="connect_date"
-                    initialValue={checkOption1 ? this.getTimeAdjustNow() : undefined}>
+                    initialValue={this.getTimeAdjustNow()}>
                     <DatePicker format={dateTimeFormat}
                         disabledTime={this.disabledDateTime}
                         showTime={{ format: 'HH:mm' }}

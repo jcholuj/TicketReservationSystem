@@ -17,11 +17,10 @@ class AppTopHeader extends React.Component {
                     <Col span={4}>
                         <div className="logo"/>
                     </Col>
-                    <Col span={6}
-                        offset={11}>
+                    <Col span={6} offset={11}>
                         <Menu className="top-menu" mode="horizontal"
                             defaultSelectedKeys={
-                                ["1"]
+                                [this.props.selectedKey]
                         }>
                             <Menu.Item key="1">Search</Menu.Item>
                             <Menu.Item disabled key="2">Info</Menu.Item>
