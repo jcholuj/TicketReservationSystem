@@ -17,6 +17,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 test {
@@ -24,10 +26,7 @@ test {
 }
 
 tasks.register('processFrontendResources', Copy) {
-    // Directory containing the artifacts in the frontend project
     def frontendBuildDir = file("${project(':frontend').buildDir}")
-    // Directory where the frontend artifacts must be copied to be packaged alltogether with the backend by the 'war'
-    // plugin.
     def frontendResourcesDir = file("${project.buildDir}/resources/main/public")
 
     group 'Frontend'
