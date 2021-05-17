@@ -39,3 +39,4 @@ out/
 /lib/
 /frontend/package-lock.json
 /frontend/src/Archive_Used_Previously/
+/backend/lib/
