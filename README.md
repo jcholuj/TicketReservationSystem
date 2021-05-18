@@ -33,11 +33,11 @@ gradlew bootRun
 Since it's a dedicated IDE for Java/Kotlin projects, everything is as user-friendly as possible.
 When opening the project, wait for the Gradle sync to commence.
 Then:
-- go to the dedicated Gradle panel:
+- go to the dedicated Gradle panel:\
   ![gradle panel](docs-media/gradle-1.png)
-- modify the run configuration of the `bootRun` task
+- modify the run configuration of the `bootRun` task\
   ![gradle panel](docs-media/gradle-2.png)
-- in the **Code Coverage** area add a "Before Launch" task - `ticket-reservation-system : clean`
+- in the **Code Coverage** area add a "Before Launch" task - `ticket-reservation-system : clean`\
   ![gradle panel](docs-media/gradle-3.png)
 
 Finally, just double-click the `bootRun` task, and the project should enter the sequence _Clean - Build - Run_
@@ -123,13 +123,9 @@ Authors:\
 
 ## Tech stack
 <img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="spring" width="130"/>
-○
 <img src="https://raw.githubusercontent.com/gradle/gradle/master/gradle.png" alt="gradle" width="130"/>
-○
 <img src="https://www.import.io/wp-content/uploads/2017/10/React-logo.png" alt="react" width="80"/>
-○
 <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="antd" width="40"/>
-○
 <img src="https://lesscss.org/public/img/less_logo.png" alt="less" width="80"/>
 
 [gradle-setup]: <https://github.com/siouan/frontend-gradle-plugin/tree/master/examples/multi-projects-war-application>
