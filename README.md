@@ -7,6 +7,14 @@ A modern web application for purchasing train tickets, with the functionality to
 ![main page](docs-media/search-page.png)
 _Start page_
 
+## Summary
+- [Installation](#installation)
+- [Launching](#launching-the-project)
+- [IntelliJ instruction](#intellij-workflow)
+- [Front-end scripts](#front-end-scripts)
+- [Gradle configuration](#gradle-configuration)
+- [Contributors](#group-info)
+
 ## Installation
 The project requires [JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) v11 to run.
 
@@ -122,11 +130,11 @@ Authors:\
 [Jędrzej Chołuj][jcholuj] | [Artem Popelyshev][apopelyshev] | [Viktor Melnyk][melnyk]
 
 ## Tech stack
-<img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="spring" width="130"/>
-<img src="https://raw.githubusercontent.com/gradle/gradle/master/gradle.png" alt="gradle" width="130"/>
-<img src="https://www.import.io/wp-content/uploads/2017/10/React-logo.png" alt="react" width="80"/>
-<img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="antd" width="40"/>
-<img src="https://lesscss.org/public/img/less_logo.png" alt="less" width="80"/>
+<img align="left" src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="spring" width="130"/>
+<img align="left" src="https://raw.githubusercontent.com/gradle/gradle/master/gradle.png" alt="gradle" width="130"/>
+<img align="left" src="https://www.import.io/wp-content/uploads/2017/10/React-logo.png" alt="react" width="80"/>
+<img align="left" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="antd" width="40"/>
+<img align="left" src="https://lesscss.org/public/img/less_logo.png" alt="less" width="80"/>
 
 [gradle-setup]: <https://github.com/siouan/frontend-gradle-plugin/tree/master/examples/multi-projects-war-application>
 [jcholuj]: <https://github.com/jcholuj>
