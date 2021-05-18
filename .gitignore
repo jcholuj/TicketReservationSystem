@@ -40,3 +40,4 @@ out/
 /frontend/package-lock.json
 /frontend/src/Archive_Used_Previously/
 /backend/lib/
+/backend/src/main/resources/application.properties
