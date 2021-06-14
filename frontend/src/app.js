@@ -1,11 +1,21 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
+import { Route, Switch } from "react-router-dom";
+import Loader from "./pages/Loader";
 
-import SearchPage from "./pages/Search/SearchPage";
+const AccountPage = lazy(() => import("./pages/Account/AccountPage"));
+const SearchPage = lazy(() => import("./pages/Search/SearchPage"));
 
 export default function App() {
-  return (
-    <>
-     <SearchPage />
-    </>
-  );
+	return (
+		<Suspense fallback={<Loader />}>
+			<Switch>
+				<Route exact path='/'>
+					<SearchPage />
+				</Route>
+				<Route path='/account'>
+					<AccountPage />
+				</Route>
+			</Switch>
+		</Suspense>
+	);
 }

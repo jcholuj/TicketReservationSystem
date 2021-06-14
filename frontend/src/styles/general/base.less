@@ -1,60 +1,68 @@
-@import "~antd/dist/antd.less";
+@import (reference) "theme";
+
 @logo-path: "../../static/logo512.png";
 
-@primary-color: @green-6;
-
 #root {
-    height: 100%;
+	min-height: 100%;
+	display: flex;
+}
+
+.cover {
+	width: 100%;
+	height: inherit;
+	background: rgba(0, 0, 0, 0.05);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .app-content {
-    margin-top: 64px;
-    min-height: calc(100% - 136px);
-    padding: 0 50px;
-    background: #fff;
+	margin-top: 64px;
+	padding: 0 50px;
+	background: #f0f2f5;
 }
 
-.top-header {
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: @box-shadow-base;
+.ant-layout-header.top-header {
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+	background-color: #fff;
+	box-shadow: @box-shadow-base;
 }
 
 .logo {
-    width: 100%;
-    height: 35px;
-    margin: 0;
-    background-image: url(@logo-path);
-    background-repeat: no-repeat;
-    background-size: contain;
+	width: 100%;
+	height: 35px;
+	margin: 0;
+	background-image: url(@logo-path);
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .top-menu:not(.ant-menu-dark) {
-    padding-right: 10px;
-    background: none;
-    border-bottom: none;
-    text-align: right;
-  
-    > .ant-menu-item {
-      top: 0;
-      margin-top: -2px;
-    }
+	padding-right: 10px;
+	background: none;
+	border-bottom: none;
+	text-align: right;
+
+	> .ant-menu-item {
+		top: 0;
+		margin-top: -2px;
+	}
 }
 
 .ant-tabs {
-    color: rgba(0, 0, 0, 0.55);
+	color: rgba(0, 0, 0, 0.55);
 
-    .ant-tabs-nav {
-        user-select: none;
-    }
+	.ant-tabs-nav {
+		user-select: none;
+	}
 }
 
 .account-form .ant-tabs {
-    overflow: visible;
+	overflow: visible;
 }
 
 .top-account-btn {
-    float: right;
+	float: right;
 }
