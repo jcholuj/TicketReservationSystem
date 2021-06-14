@@ -1,6 +1,7 @@
 package com.awt_group1.ticketreservationsystem.services;
 
-import com.awt_group1.ticketreservationsystem.entities.Connection;
+
+import com.awt_group1.ticketreservationsystem.model.Connection;
 import com.awt_group1.ticketreservationsystem.repositories.ConnectionRepository;
 import com.awt_group1.ticketreservationsystem.repositories.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,7 @@
 package com.awt_group1.ticketreservationsystem.contoller;
 
-import com.awt_group1.ticketreservationsystem.entities.Customer;
+import com.awt_group1.ticketreservationsystem.model.Customer;
 import com.awt_group1.ticketreservationsystem.services.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

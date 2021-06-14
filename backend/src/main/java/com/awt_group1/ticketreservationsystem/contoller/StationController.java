@@ -1,10 +1,8 @@
 package com.awt_group1.ticketreservationsystem.contoller;
 
-import com.awt_group1.ticketreservationsystem.entities.Station;
-import com.awt_group1.ticketreservationsystem.entities.StationLink;
-import com.awt_group1.ticketreservationsystem.repositories.StationRepository;
+
+import com.awt_group1.ticketreservationsystem.model.Station;
 import com.awt_group1.ticketreservationsystem.services.StationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

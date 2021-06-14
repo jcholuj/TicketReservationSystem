@@ -1,31 +1,103 @@
 package com.awt_group1.ticketreservationsystem.model;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//
-//@Entity // This tells Hibernate to make a table out of this class
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.Objects;
+
+@Entity
 public class Person {
-//    @Id
-//    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String personId;
+    private String firstName;
+    private String secondName;
+    private Date birthDate;
+    private String nationality;
+    private String gender;
+    private Byte isCustomer;
 
-    private String name;
-
-    public Integer getId() {
-        return id;
+    @Id
+    @Column(name = "Person_Id", nullable = false, length = 36)
+    public String getPersonId() {
+        return personId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
-    public String getName() {
-        return name;
+    @Basic
+    @Column(name = "First_Name", nullable = true, length = 255)
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    @Basic
+    @Column(name = "Second_Name", nullable = true, length = 255)
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    @Basic
+    @Column(name = "Birth_Date", nullable = true)
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    @Basic
+    @Column(name = "Nationality", nullable = true, length = 2)
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    @Basic
+    @Column(name = "Gender", nullable = true, length = 1)
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Basic
+    @Column(name = "Is_Customer", nullable = true)
+    public Byte getIsCustomer() {
+        return isCustomer;
+    }
+
+    public void setIsCustomer(Byte isCustomer) {
+        this.isCustomer = isCustomer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(personId, person.personId) && Objects.equals(firstName, person.firstName) && Objects.equals(secondName, person.secondName) && Objects.equals(birthDate, person.birthDate) && Objects.equals(nationality, person.nationality) && Objects.equals(gender, person.gender) && Objects.equals(isCustomer, person.isCustomer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(personId, firstName, secondName, birthDate, nationality, gender, isCustomer);
     }
 }

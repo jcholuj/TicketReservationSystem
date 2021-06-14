@@ -1,8 +1,6 @@
 package com.awt_group1.ticketreservationsystem.services;
 
-import com.awt_group1.ticketreservationsystem.entities.StationLink;
-import com.awt_group1.ticketreservationsystem.entities.Train;
-import com.awt_group1.ticketreservationsystem.repositories.StationLinkRepository;
+import com.awt_group1.ticketreservationsystem.model.Train;
 import com.awt_group1.ticketreservationsystem.repositories.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

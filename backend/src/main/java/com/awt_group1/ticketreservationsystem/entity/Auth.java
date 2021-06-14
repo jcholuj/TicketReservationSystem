@@ -1,4 +1,4 @@
-package com.awt_group1.ticketreservationsystem.entities;
+package com.awt_group1.ticketreservationsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

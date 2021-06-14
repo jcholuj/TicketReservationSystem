@@ -1,6 +1,6 @@
 package com.awt_group1.ticketreservationsystem.services;
 
-import com.awt_group1.ticketreservationsystem.entities.Auth;
+import com.awt_group1.ticketreservationsystem.entity.Auth;
 import com.awt_group1.ticketreservationsystem.repositories.AuthRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +25,10 @@ public class AuthService {
 
     public boolean canBeAuthenticated(String name, String password) {
         Optional<Auth> authOptional = this.authRepository.findByMail(name);
-        if (!authOptional.isPresent()) {
+        if (authOptional.isEmpty()) {
             return false;
         } else {
-            boolean matches = this.passwordEncoder().matches(password, ((Auth)authOptional.get()).getEncryptedPassword());
+            boolean matches = this.passwordEncoder().matches(password, authOptional.get().getEncryptedPassword());
             logger.info("Can be authenticated: " + matches + ", name: " + name + ", password: " + password);
             return matches;
         }
