@@ -9,9 +9,9 @@ import javax.persistence.Id;
 public class Connection {
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
-    private String id;
+    private Long id;
     private String typeId;
     private String originId;
     private String destinationId;
@@ -23,7 +23,7 @@ public class Connection {
 
     public Connection() { }
 
-    public Connection(String id, String typeId, String originId, String destinationId, Double duration, String departureTime, String arrivalTime, String trainId, String route) {
+    public Connection(Long id, String typeId, String originId, String destinationId, Double duration, String departureTime, String arrivalTime, String trainId, String route) {
         this.id = id;
         this.typeId = typeId;
         this.originId = originId;
@@ -44,11 +44,11 @@ public class Connection {
         return arrivalTime;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

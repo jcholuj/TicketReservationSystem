@@ -1,57 +1,54 @@
 package com.awt_group1.ticketreservationsystem.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
-    private List<Role> roles;
-    private String customerID;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long customerId;
+//    @ElementCollection
+//    private List<Role> roles;
     private String username;
     private String email;
     private String phone;
     private String password;
     private String locationID;
-    private String prefferedStationID;
-    private String prefferedPaymentSystem;
+    private String preferredStationID;
+    private String preferredPaymentSystem;
     private String lastUpdate;
 
-    public Customer(String customerID,
+    public Customer(Long customerId,
                     String username,
                     String email,
                     String phone,
                     String password,
                     String locationID,
-                    String prefferedStationID,
-                    String prefferedPaymentSystem,
+                    String preferredStationID,
+                    String preferredPaymentSystem,
                     String lastUpdate) {
-        this.customerID = customerID;
+        this.customerId = customerId;
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.locationID = locationID;
-        this.prefferedStationID = prefferedStationID;
-        this.prefferedPaymentSystem = prefferedPaymentSystem;
+        this.preferredStationID = preferredStationID;
+        this.preferredPaymentSystem = preferredPaymentSystem;
         this.lastUpdate = lastUpdate;
     }
 
+    public Customer() {
 
-    public String getCustomerID() {
-        return customerID;
     }
 
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerID) {
+        this.customerId = customerID;
     }
 
     public String getUsername() {
@@ -94,20 +91,20 @@ public class Customer {
         this.locationID = locationID;
     }
 
-    public String getPrefferedStationID() {
-        return prefferedStationID;
+    public String getPreferredStationID() {
+        return preferredStationID;
     }
 
-    public void setPrefferedStationID(String prefferedStationID) {
-        this.prefferedStationID = prefferedStationID;
+    public void setPreferredStationID(String preferredStationID) {
+        this.preferredStationID = preferredStationID;
     }
 
-    public String getPrefferedPaymentSystem() {
-        return prefferedPaymentSystem;
+    public String getPreferredPaymentSystem() {
+        return preferredPaymentSystem;
     }
 
-    public void setPrefferedPaymentSystem(String prefferedPaymentSystem) {
-        this.prefferedPaymentSystem = prefferedPaymentSystem;
+    public void setPreferredPaymentSystem(String preferredPaymentSystem) {
+        this.preferredPaymentSystem = preferredPaymentSystem;
     }
 
     public String getLastUpdate() {
@@ -119,11 +116,11 @@ public class Customer {
     }
 
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
+//    public List<Role> getRoles() {
+//        return roles;
+//    }
+//    public void setRoles(List<Role> roles) {
+//        this.roles = roles;
+//    }
 }
 

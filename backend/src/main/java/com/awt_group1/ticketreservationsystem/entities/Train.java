@@ -9,9 +9,9 @@ import javax.persistence.Id;
 public class Train {
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
-    private String trainId;
+    private Long trainId;
     private String model;
     private String registrationDate;
     private int seatingCapacity;
@@ -24,7 +24,7 @@ public class Train {
     public Train() { }
 
     public Train(
-            String trainId,
+            Long trainId,
             String model,
             String registrationDate,
             int seatingCapacity,
@@ -44,11 +44,11 @@ public class Train {
         this.operationPrice = operationPrice;
     }
 
-    public String getTrainId() {
+    public Long getTrainId() {
         return trainId;
     }
 
-    public void setTrainId(String trainId) {
+    public void setTrainId(Long trainId) {
         this.trainId = trainId;
     }
 

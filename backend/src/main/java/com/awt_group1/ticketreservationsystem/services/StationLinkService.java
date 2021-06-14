@@ -5,10 +5,12 @@ import com.awt_group1.ticketreservationsystem.entities.StationLink;
 import com.awt_group1.ticketreservationsystem.repositories.CustomerRepository;
 import com.awt_group1.ticketreservationsystem.repositories.StationLinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.List;
 
+@Service
 public class StationLinkService {
     @Autowired
     StationLinkRepository stationLinkRepository;

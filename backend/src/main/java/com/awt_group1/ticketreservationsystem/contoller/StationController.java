@@ -14,8 +14,11 @@ import java.util.Optional;
 @RequestMapping("/api/station")
 public class StationController {
 
-    @Autowired
-    private StationService stationService;
+    private final StationService stationService;
+
+    public StationController(StationService stationService) {
+        this.stationService = stationService;
+    }
 
     @GetMapping("/all")
     public List<Station> findAllStations() {

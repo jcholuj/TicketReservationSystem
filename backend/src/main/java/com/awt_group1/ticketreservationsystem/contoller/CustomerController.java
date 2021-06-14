@@ -14,8 +14,11 @@ import java.util.Optional;
 @RequestMapping("api/customer")
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping("/")
     public ModelAndView home(Principal principal) {

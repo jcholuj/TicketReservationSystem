@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String userMail) throws UsernameNotFoundException {
-        Optional<Customer> customer = customerRepository.findByMail(userMail);
-        if (!customer.isPresent()) {
+        Optional<Customer> customer = null;
+        if (customer.isEmpty()) {
             throw new UsernameNotFoundException("User is not Found");
         }
         return new org.springframework.security.core.userdetails.User(customer.get().getUsername(),
                 customer.get().getPassword(),
-                mapRolesToAuthorities(customer.get().getRoles()));
+                mapRolesToAuthorities(new ArrayList<>()));
     }
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
         return roles.stream()

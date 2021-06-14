@@ -1,15 +1,16 @@
 package com.awt_group1.ticketreservationsystem.services;
 
-import com.awt_group1.ticketreservationsystem.entities.Connection;
 import com.awt_group1.ticketreservationsystem.entities.Station;
 import com.awt_group1.ticketreservationsystem.repositories.ConnectionRepository;
 import com.awt_group1.ticketreservationsystem.repositories.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class StationService {
     @Autowired
     StationRepository stationRepository;

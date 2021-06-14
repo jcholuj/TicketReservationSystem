@@ -1,18 +1,15 @@
 package com.awt_group1.ticketreservationsystem.entities;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Station {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
-    private String stationId;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long stationId;
     private String name;
     private String code;
     private String locationId;
@@ -24,7 +21,7 @@ public class Station {
     public Station() { }
 
     public Station(
-            String stationId,
+            Long stationId,
             String name,
             String code,
             String locationId,
@@ -42,11 +39,11 @@ public class Station {
         this.commuteOptions = commuteOptions;
     }
 
-    public String getStationId() {
+    public Long getStationId() {
         return stationId;
     }
 
-    public void setStationId(String stationId) {
+    public void setStationId(Long stationId) {
         this.stationId = stationId;
     }
 

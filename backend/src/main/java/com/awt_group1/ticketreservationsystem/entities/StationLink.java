@@ -9,9 +9,9 @@ import javax.persistence.Id;
 public class StationLink {
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
-    private String linkId;
+    private Long linkId;
     private String startNode;
     private String endNode;
     private int length;
@@ -19,7 +19,7 @@ public class StationLink {
 
     public StationLink() { }
 
-    public StationLink(String linkId, String startNode, String endNode, int length, double utilizationPrice) {
+    public StationLink(Long linkId, String startNode, String endNode, int length, double utilizationPrice) {
         this.linkId = linkId;
         this.startNode = startNode;
         this.endNode = endNode;
@@ -27,9 +27,9 @@ public class StationLink {
         this.utilizationPrice = utilizationPrice;
     }
 
-    public String getLinkId() { return this.linkId; }
+    public Long getLinkId() { return this.linkId; }
 
-    public void setLinkId(String id) { this.linkId = id; }
+    public void setLinkId(Long id) { this.linkId = id; }
 
     public String getStartNode() {
         return startNode;

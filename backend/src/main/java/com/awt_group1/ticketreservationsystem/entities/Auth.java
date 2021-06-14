@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Auth {
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
     private Long id;
     private String mail;
@@ -22,6 +22,10 @@ public class Auth {
         this.id = id;
         this.mail = mail;
         this.encryptedPassword = encryptedPassword;
+    }
+
+    public Auth() {
+
     }
 
     public Long getId() {

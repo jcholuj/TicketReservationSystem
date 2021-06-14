@@ -3,9 +3,12 @@ package com.awt_group1.ticketreservationsystem.services;
 import com.awt_group1.ticketreservationsystem.entities.Customer;
 import com.awt_group1.ticketreservationsystem.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;

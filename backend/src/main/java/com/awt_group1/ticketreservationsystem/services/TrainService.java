@@ -5,10 +5,12 @@ import com.awt_group1.ticketreservationsystem.entities.Train;
 import com.awt_group1.ticketreservationsystem.repositories.StationLinkRepository;
 import com.awt_group1.ticketreservationsystem.repositories.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TrainService {
     @Autowired
     TrainRepository trainRepository;

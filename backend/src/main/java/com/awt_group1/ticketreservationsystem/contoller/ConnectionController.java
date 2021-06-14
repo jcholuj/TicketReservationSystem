@@ -13,8 +13,11 @@ import java.util.Optional;
 @RequestMapping("api/connection")
 public class ConnectionController {
 
-    @Autowired
-    private ConnectionService connectionService;
+    private final ConnectionService connectionService;
+
+    public ConnectionController(ConnectionService connectionService) {
+        this.connectionService = connectionService;
+    }
 
     @GetMapping("/{id}")
     public Optional<Connection> getConnectionById(@PathVariable String id) { return connectionService.findById(id); }

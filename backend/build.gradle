@@ -25,18 +25,18 @@ test {
     useJUnitPlatform()
 }
 
-tasks.register('processFrontendResources', Copy) {
-    def frontendBuildDir = file("${project(':frontend').buildDir}")
-    def frontendResourcesDir = file("${project.buildDir}/resources/main/public")
-
-    group 'Frontend'
-    description 'Process frontend resources'
-    dependsOn project(':frontend').tasks.named('assembleFrontend')
-
-    from frontendBuildDir
-    into frontendResourcesDir
-}
-
-tasks.named('processResources') {
-    dependsOn tasks.named('processFrontendResources')
-}
+//tasks.register('processFrontendResources', Copy) {
+//    def frontendBuildDir = file("${project(':frontend').buildDir}")
+//    def frontendResourcesDir = file("${project.buildDir}/resources/main/public")
+//
+//    group 'Frontend'
+//    description 'Process frontend resources'
+//    dependsOn project(':frontend').tasks.named('assembleFrontend')
+//
+//    from frontendBuildDir
+//    into frontendResourcesDir
+//}
+//
+//tasks.named('processResources') {
+//    dependsOn tasks.named('processFrontendResources')
+//}

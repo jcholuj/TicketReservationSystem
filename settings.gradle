@@ -11,6 +11,6 @@ pluginManagement {
     }
 }
 
-include 'backend', 'frontend'
+include 'backend'
 
 rootProject.name = 'ticket-reservation-system'
