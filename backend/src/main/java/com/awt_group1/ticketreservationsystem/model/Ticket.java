@@ -8,15 +8,15 @@ import java.util.Objects;
 
 @Entity
 public class Ticket {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String ticketId;
-    private String orderId;
     private Timestamp validFrom;
     private Timestamp validUntil;
-    private String connectionId;
+    private SalesOrder salesOrderByOrderId;
+    private Connection connectionByConnectionId;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Ticket_Id", nullable = false, length = 36)
     public String getTicketId() {
         return ticketId;
@@ -24,16 +24,6 @@ public class Ticket {
 
     public void setTicketId(String ticketId) {
         this.ticketId = ticketId;
-    }
-
-    @Basic
-    @Column(name = "Order_Id", nullable = false, length = 36)
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
     }
 
     @Basic
@@ -56,26 +46,36 @@ public class Ticket {
         this.validUntil = validUntil;
     }
 
-    @Basic
-    @Column(name = "Connection_Id", nullable = false, length = 36)
-    public String getConnectionId() {
-        return connectionId;
-    }
-
-    public void setConnectionId(String connectionId) {
-        this.connectionId = connectionId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return Objects.equals(ticketId, ticket.ticketId) && Objects.equals(orderId, ticket.orderId) && Objects.equals(validFrom, ticket.validFrom) && Objects.equals(validUntil, ticket.validUntil) && Objects.equals(connectionId, ticket.connectionId);
+        return Objects.equals(ticketId, ticket.ticketId) && Objects.equals(validFrom, ticket.validFrom) && Objects.equals(validUntil, ticket.validUntil);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketId, orderId, validFrom, validUntil, connectionId);
+        return Objects.hash(ticketId, validFrom, validUntil);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Order_Id", referencedColumnName = "Order_Id", nullable = false)
+    public SalesOrder getSalesOrderByOrderId() {
+        return salesOrderByOrderId;
+    }
+
+    public void setSalesOrderByOrderId(SalesOrder salesOrderByOrderId) {
+        this.salesOrderByOrderId = salesOrderByOrderId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Connection_Id", referencedColumnName = "Connection_Id", nullable = false)
+    public Connection getConnectionByConnectionId() {
+        return connectionByConnectionId;
+    }
+
+    public void setConnectionByConnectionId(Connection connectionByConnectionId) {
+        this.connectionByConnectionId = connectionByConnectionId;
     }
 }

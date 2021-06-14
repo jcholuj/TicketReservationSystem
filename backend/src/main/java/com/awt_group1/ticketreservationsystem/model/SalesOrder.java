@@ -4,22 +4,24 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class SalesOrder {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String orderId;
-    private String customerId;
-    private String personId;
     private Timestamp creationDate;
     private String paymentId;
     private Integer ticketsAmount;
     private Byte isUnregistered;
     private Byte isArchived;
+    private Customer customerByCustomerId;
+    private Person personByPersonId;
+    private Collection<Ticket> ticketsByOrderId;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Order_Id", nullable = false, length = 36)
     public String getOrderId() {
         return orderId;
@@ -27,26 +29,6 @@ public class SalesOrder {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
-    }
-
-    @Basic
-    @Column(name = "Customer_Id", nullable = true, length = 36)
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    @Basic
-    @Column(name = "Person_Id", nullable = true, length = 36)
-    public String getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId;
     }
 
     @Basic
@@ -104,11 +86,40 @@ public class SalesOrder {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SalesOrder that = (SalesOrder) o;
-        return Objects.equals(orderId, that.orderId) && Objects.equals(customerId, that.customerId) && Objects.equals(personId, that.personId) && Objects.equals(creationDate, that.creationDate) && Objects.equals(paymentId, that.paymentId) && Objects.equals(ticketsAmount, that.ticketsAmount) && Objects.equals(isUnregistered, that.isUnregistered) && Objects.equals(isArchived, that.isArchived);
+        return Objects.equals(orderId, that.orderId) && Objects.equals(creationDate, that.creationDate) && Objects.equals(paymentId, that.paymentId) && Objects.equals(ticketsAmount, that.ticketsAmount) && Objects.equals(isUnregistered, that.isUnregistered) && Objects.equals(isArchived, that.isArchived);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, customerId, personId, creationDate, paymentId, ticketsAmount, isUnregistered, isArchived);
+        return Objects.hash(orderId, creationDate, paymentId, ticketsAmount, isUnregistered, isArchived);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Customer_Id", referencedColumnName = "Customer_Id")
+    public Customer getCustomerByCustomerId() {
+        return customerByCustomerId;
+    }
+
+    public void setCustomerByCustomerId(Customer customerByCustomerId) {
+        this.customerByCustomerId = customerByCustomerId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Person_Id", referencedColumnName = "Person_Id")
+    public Person getPersonByPersonId() {
+        return personByPersonId;
+    }
+
+    public void setPersonByPersonId(Person personByPersonId) {
+        this.personByPersonId = personByPersonId;
+    }
+
+    @OneToMany(mappedBy = "salesOrderByOrderId")
+    public Collection<Ticket> getTicketsByOrderId() {
+        return ticketsByOrderId;
+    }
+
+    public void setTicketsByOrderId(Collection<Ticket> ticketsByOrderId) {
+        this.ticketsByOrderId = ticketsByOrderId;
     }
 }

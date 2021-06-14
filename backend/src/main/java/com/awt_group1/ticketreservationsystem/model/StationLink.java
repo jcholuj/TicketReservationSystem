@@ -8,15 +8,15 @@ import java.util.Objects;
 
 @Entity
 public class StationLink {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String linkId;
-    private String startNode;
-    private String endNode;
     private BigDecimal length;
     private BigDecimal utilizationPrice;
+    private Station stationByStartNode;
+    private Station stationByEndNode;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Link_Id", nullable = false, length = 36)
     public String getLinkId() {
         return linkId;
@@ -24,26 +24,6 @@ public class StationLink {
 
     public void setLinkId(String linkId) {
         this.linkId = linkId;
-    }
-
-    @Basic
-    @Column(name = "Start_Node", nullable = true, length = 36)
-    public String getStartNode() {
-        return startNode;
-    }
-
-    public void setStartNode(String startNode) {
-        this.startNode = startNode;
-    }
-
-    @Basic
-    @Column(name = "End_Node", nullable = true, length = 36)
-    public String getEndNode() {
-        return endNode;
-    }
-
-    public void setEndNode(String endNode) {
-        this.endNode = endNode;
     }
 
     @Basic
@@ -71,11 +51,31 @@ public class StationLink {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StationLink that = (StationLink) o;
-        return Objects.equals(linkId, that.linkId) && Objects.equals(startNode, that.startNode) && Objects.equals(endNode, that.endNode) && Objects.equals(length, that.length) && Objects.equals(utilizationPrice, that.utilizationPrice);
+        return Objects.equals(linkId, that.linkId) && Objects.equals(length, that.length) && Objects.equals(utilizationPrice, that.utilizationPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(linkId, startNode, endNode, length, utilizationPrice);
+        return Objects.hash(linkId, length, utilizationPrice);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Start_Node", referencedColumnName = "Station_Id")
+    public Station getStationByStartNode() {
+        return stationByStartNode;
+    }
+
+    public void setStationByStartNode(Station stationByStartNode) {
+        this.stationByStartNode = stationByStartNode;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "End_Node", referencedColumnName = "Station_Id")
+    public Station getStationByEndNode() {
+        return stationByEndNode;
+    }
+
+    public void setStationByEndNode(Station stationByEndNode) {
+        this.stationByEndNode = stationByEndNode;
     }
 }

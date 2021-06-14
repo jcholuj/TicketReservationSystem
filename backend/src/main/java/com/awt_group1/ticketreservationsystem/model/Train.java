@@ -5,20 +5,22 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Train {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String trainId;
     private String model;
     private Date registerDate;
     private Integer seatingCapacity;
     private BigDecimal operationSpeed;
     private BigDecimal operationPrice;
+    private Collection<Connection> connectionsByTrainId;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Train_Id", nullable = false, length = 36)
     public String getTrainId() {
         return trainId;
@@ -89,5 +91,14 @@ public class Train {
     @Override
     public int hashCode() {
         return Objects.hash(trainId, model, registerDate, seatingCapacity, operationSpeed, operationPrice);
+    }
+
+    @OneToMany(mappedBy = "trainByTrainId")
+    public Collection<Connection> getConnectionsByTrainId() {
+        return connectionsByTrainId;
+    }
+
+    public void setConnectionsByTrainId(Collection<Connection> connectionsByTrainId) {
+        this.connectionsByTrainId = connectionsByTrainId;
     }
 }

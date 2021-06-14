@@ -4,12 +4,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Person {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String personId;
     private String firstName;
     private String secondName;
@@ -17,8 +16,12 @@ public class Person {
     private String nationality;
     private String gender;
     private Byte isCustomer;
+    private Collection<Customer> customersByPersonId;
+    private Collection<SalesOrder> salesOrdersByPersonId;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Person_Id", nullable = false, length = 36)
     public String getPersonId() {
         return personId;
@@ -99,5 +102,23 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(personId, firstName, secondName, birthDate, nationality, gender, isCustomer);
+    }
+
+    @OneToMany(mappedBy = "personByPersonId")
+    public Collection<Customer> getCustomersByPersonId() {
+        return customersByPersonId;
+    }
+
+    public void setCustomersByPersonId(Collection<Customer> customersByPersonId) {
+        this.customersByPersonId = customersByPersonId;
+    }
+
+    @OneToMany(mappedBy = "personByPersonId")
+    public Collection<SalesOrder> getSalesOrdersByPersonId() {
+        return salesOrdersByPersonId;
+    }
+
+    public void setSalesOrdersByPersonId(Collection<SalesOrder> salesOrdersByPersonId) {
+        this.salesOrdersByPersonId = salesOrdersByPersonId;
     }
 }

@@ -32,8 +32,8 @@ public class StationService {
         return connectionRepository
                 .findAll()
                 .stream()
-                .filter(c -> c.getOriginId().equals(originId))
-                .map(c -> stationRepository.findById(c.getDestinationId()))
+                .filter(c -> c.getStationByOriginId().getStationId().equals(originId))
+                .map(c -> stationRepository.findById(c.getStationByDestinationId().getStationId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -43,8 +43,8 @@ public class StationService {
         return connectionRepository
                 .findAll()
                 .stream()
-                .filter(c -> c.getDestinationId().equals(destinationId))
-                .map(c -> stationRepository.findById(c.getOriginId()))
+                .filter(c -> c.getStationByDestinationId().getStationId().equals(destinationId))
+                .map(c -> stationRepository.findById(c.getStationByOriginId().getStationId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());

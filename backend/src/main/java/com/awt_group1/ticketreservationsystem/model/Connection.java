@@ -5,22 +5,24 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Connection {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String connectionId;
     private String typeId;
-    private String originId;
-    private String destinationId;
     private BigDecimal duration;
     private Timestamp departureTime;
     private Timestamp arrivalTime;
-    private String trainId;
+    private Station stationByOriginId;
+    private Station stationByDestinationId;
+    private Train trainByTrainId;
+    private Collection<Ticket> ticketsByConnectionId;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Connection_Id", nullable = false, length = 36)
     public String getConnectionId() {
         return connectionId;
@@ -38,26 +40,6 @@ public class Connection {
 
     public void setTypeId(String typeId) {
         this.typeId = typeId;
-    }
-
-    @Basic
-    @Column(name = "Origin_Id", nullable = true, length = 36)
-    public String getOriginId() {
-        return originId;
-    }
-
-    public void setOriginId(String originId) {
-        this.originId = originId;
-    }
-
-    @Basic
-    @Column(name = "Destination_Id", nullable = true, length = 36)
-    public String getDestinationId() {
-        return destinationId;
-    }
-
-    public void setDestinationId(String destinationId) {
-        this.destinationId = destinationId;
     }
 
     @Basic
@@ -90,26 +72,55 @@ public class Connection {
         this.arrivalTime = arrivalTime;
     }
 
-    @Basic
-    @Column(name = "Train_Id", nullable = true, length = 36)
-    public String getTrainId() {
-        return trainId;
-    }
-
-    public void setTrainId(String trainId) {
-        this.trainId = trainId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Connection that = (Connection) o;
-        return Objects.equals(connectionId, that.connectionId) && Objects.equals(typeId, that.typeId) && Objects.equals(originId, that.originId) && Objects.equals(destinationId, that.destinationId) && Objects.equals(duration, that.duration) && Objects.equals(departureTime, that.departureTime) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(trainId, that.trainId);
+        return Objects.equals(connectionId, that.connectionId) && Objects.equals(typeId, that.typeId) && Objects.equals(duration, that.duration) && Objects.equals(departureTime, that.departureTime) && Objects.equals(arrivalTime, that.arrivalTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(connectionId, typeId, originId, destinationId, duration, departureTime, arrivalTime, trainId);
+        return Objects.hash(connectionId, typeId, duration, departureTime, arrivalTime);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Origin_Id", referencedColumnName = "Station_Id")
+    public Station getStationByOriginId() {
+        return stationByOriginId;
+    }
+
+    public void setStationByOriginId(Station stationByOriginId) {
+        this.stationByOriginId = stationByOriginId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Destination_Id", referencedColumnName = "Station_Id")
+    public Station getStationByDestinationId() {
+        return stationByDestinationId;
+    }
+
+    public void setStationByDestinationId(Station stationByDestinationId) {
+        this.stationByDestinationId = stationByDestinationId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Train_Id", referencedColumnName = "Train_Id")
+    public Train getTrainByTrainId() {
+        return trainByTrainId;
+    }
+
+    public void setTrainByTrainId(Train trainByTrainId) {
+        this.trainByTrainId = trainByTrainId;
+    }
+
+    @OneToMany(mappedBy = "connectionByConnectionId")
+    public Collection<Ticket> getTicketsByConnectionId() {
+        return ticketsByConnectionId;
+    }
+
+    public void setTicketsByConnectionId(Collection<Ticket> ticketsByConnectionId) {
+        this.ticketsByConnectionId = ticketsByConnectionId;
     }
 }

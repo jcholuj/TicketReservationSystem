@@ -4,20 +4,22 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Customer {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String customerId;
-    private String personId;
     private Integer ordersCount;
     private Timestamp registrationDate;
     private Byte isActive;
     private Byte isAdmin;
+    private Person personByPersonId;
+    private Collection<SalesOrder> salesOrdersByCustomerId;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Customer_Id", nullable = false, length = 36)
     public String getCustomerId() {
         return customerId;
@@ -25,16 +27,6 @@ public class Customer {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
-    }
-
-    @Basic
-    @Column(name = "Person_Id", nullable = false, length = 36)
-    public String getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId;
     }
 
     @Basic
@@ -82,11 +74,30 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(customerId, customer.customerId) && Objects.equals(personId, customer.personId) && Objects.equals(ordersCount, customer.ordersCount) && Objects.equals(registrationDate, customer.registrationDate) && Objects.equals(isActive, customer.isActive) && Objects.equals(isAdmin, customer.isAdmin);
+        return Objects.equals(customerId, customer.customerId) && Objects.equals(ordersCount, customer.ordersCount) && Objects.equals(registrationDate, customer.registrationDate) && Objects.equals(isActive, customer.isActive) && Objects.equals(isAdmin, customer.isAdmin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, personId, ordersCount, registrationDate, isActive, isAdmin);
+        return Objects.hash(customerId, ordersCount, registrationDate, isActive, isAdmin);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Person_Id", referencedColumnName = "Person_Id", nullable = false)
+    public Person getPersonByPersonId() {
+        return personByPersonId;
+    }
+
+    public void setPersonByPersonId(Person personByPersonId) {
+        this.personByPersonId = personByPersonId;
+    }
+
+    @OneToMany(mappedBy = "customerByCustomerId")
+    public Collection<SalesOrder> getSalesOrdersByCustomerId() {
+        return salesOrdersByCustomerId;
+    }
+
+    public void setSalesOrdersByCustomerId(Collection<SalesOrder> salesOrdersByCustomerId) {
+        this.salesOrdersByCustomerId = salesOrdersByCustomerId;
     }
 }

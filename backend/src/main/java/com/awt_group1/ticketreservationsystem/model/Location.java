@@ -4,21 +4,24 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Location {
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String locationId;
     private String addressLine;
     private String postalCode;
     private String city;
     private String country;
-    private BigDecimal longtitude;
+    private BigDecimal longitude;
     private BigDecimal latitude;
+    private Collection<CustomerData> customerDataByLocationId;
+    private Collection<Station> stationsByLocationId;
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "Location_Id", nullable = false, length = 36)
     public String getLocationId() {
         return locationId;
@@ -69,13 +72,13 @@ public class Location {
     }
 
     @Basic
-    @Column(name = "Longtitude", nullable = true, precision = 9, scale = 6)
-    public BigDecimal getLongtitude() {
-        return longtitude;
+    @Column(name = "Longitude", nullable = true, precision = 9, scale = 6)
+    public BigDecimal getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(BigDecimal longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
     }
 
     @Basic
@@ -93,11 +96,29 @@ public class Location {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
-        return Objects.equals(locationId, location.locationId) && Objects.equals(addressLine, location.addressLine) && Objects.equals(postalCode, location.postalCode) && Objects.equals(city, location.city) && Objects.equals(country, location.country) && Objects.equals(longtitude, location.longtitude) && Objects.equals(latitude, location.latitude);
+        return Objects.equals(locationId, location.locationId) && Objects.equals(addressLine, location.addressLine) && Objects.equals(postalCode, location.postalCode) && Objects.equals(city, location.city) && Objects.equals(country, location.country) && Objects.equals(longitude, location.longitude) && Objects.equals(latitude, location.latitude);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(locationId, addressLine, postalCode, city, country, longtitude, latitude);
+        return Objects.hash(locationId, addressLine, postalCode, city, country, longitude, latitude);
+    }
+
+    @OneToMany(mappedBy = "locationByLocationId")
+    public Collection<CustomerData> getCustomerDataByLocationId() {
+        return customerDataByLocationId;
+    }
+
+    public void setCustomerDataByLocationId(Collection<CustomerData> customerDataByLocationId) {
+        this.customerDataByLocationId = customerDataByLocationId;
+    }
+
+    @OneToMany(mappedBy = "locationByLocationId")
+    public Collection<Station> getStationsByLocationId() {
+        return stationsByLocationId;
+    }
+
+    public void setStationsByLocationId(Collection<Station> stationsByLocationId) {
+        this.stationsByLocationId = stationsByLocationId;
     }
 }

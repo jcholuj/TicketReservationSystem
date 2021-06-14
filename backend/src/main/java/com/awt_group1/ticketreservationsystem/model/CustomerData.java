@@ -1,9 +1,6 @@
 package com.awt_group1.ticketreservationsystem.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -13,10 +10,10 @@ public class CustomerData {
     private String username;
     private String email;
     private String customerPassword;
-    private String locationId;
-    private String preferredStationId;
     private String preferredPaymentMethod;
     private Timestamp lastUpdate;
+    private Location locationByLocationId;
+    private Station stationByPreferredStationId;
 
     @Id
     @Column(name = "Customer_Id", nullable = false, length = 36)
@@ -59,26 +56,6 @@ public class CustomerData {
     }
 
     @Basic
-    @Column(name = "Location_Id", nullable = true, length = 36)
-    public String getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
-    }
-
-    @Basic
-    @Column(name = "Preferred_Station_Id", nullable = true, length = 36)
-    public String getPreferredStationId() {
-        return preferredStationId;
-    }
-
-    public void setPreferredStationId(String preferredStationId) {
-        this.preferredStationId = preferredStationId;
-    }
-
-    @Basic
     @Column(name = "Preferred_Payment_Method", nullable = true, length = 20)
     public String getPreferredPaymentMethod() {
         return preferredPaymentMethod;
@@ -103,11 +80,31 @@ public class CustomerData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerData that = (CustomerData) o;
-        return Objects.equals(customerId, that.customerId) && Objects.equals(username, that.username) && Objects.equals(email, that.email) && Objects.equals(customerPassword, that.customerPassword) && Objects.equals(locationId, that.locationId) && Objects.equals(preferredStationId, that.preferredStationId) && Objects.equals(preferredPaymentMethod, that.preferredPaymentMethod) && Objects.equals(lastUpdate, that.lastUpdate);
+        return Objects.equals(customerId, that.customerId) && Objects.equals(username, that.username) && Objects.equals(email, that.email) && Objects.equals(customerPassword, that.customerPassword) && Objects.equals(preferredPaymentMethod, that.preferredPaymentMethod) && Objects.equals(lastUpdate, that.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, username, email, customerPassword, locationId, preferredStationId, preferredPaymentMethod, lastUpdate);
+        return Objects.hash(customerId, username, email, customerPassword, preferredPaymentMethod, lastUpdate);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Location_Id", referencedColumnName = "Location_Id")
+    public Location getLocationByLocationId() {
+        return locationByLocationId;
+    }
+
+    public void setLocationByLocationId(Location locationByLocationId) {
+        this.locationByLocationId = locationByLocationId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Preferred_Station_Id", referencedColumnName = "Station_Id")
+    public Station getStationByPreferredStationId() {
+        return stationByPreferredStationId;
+    }
+
+    public void setStationByPreferredStationId(Station stationByPreferredStationId) {
+        this.stationByPreferredStationId = stationByPreferredStationId;
     }
 }
