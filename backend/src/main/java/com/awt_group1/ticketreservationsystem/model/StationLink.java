@@ -1,5 +1,7 @@
 package com.awt_group1.ticketreservationsystem.model;
 
+import com.awt_group1.ticketreservationsystem.repositories.StationLinkRepository;
+import com.awt_group1.ticketreservationsystem.repositories.StationRepository;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,6 +15,16 @@ public class StationLink {
     private BigDecimal utilizationPrice;
     private Station stationByStartNode;
     private Station stationByEndNode;
+
+    StationRepository stationRepository;
+
+    public StationLink(StationLinkDTO stationLink) {
+        this.linkId = stationLink.getLinkId();
+        this.length = stationLink.getLength();
+        this.utilizationPrice = stationLink.getUtilizationPrice();
+        this.stationByStartNode = stationRepository.findById(stationLink.getStartNodeId()).get();
+        this.stationByEndNode = stationRepository.findById(stationLink.getEndNodeId()).get();
+    }
 
     @Id
     @GeneratedValue(generator = "UUID")
