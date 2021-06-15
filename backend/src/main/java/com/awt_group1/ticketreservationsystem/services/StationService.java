@@ -1,6 +1,7 @@
 package com.awt_group1.ticketreservationsystem.services;
 
 import com.awt_group1.ticketreservationsystem.model.Station;
+import com.awt_group1.ticketreservationsystem.model.StationDTO;
 import com.awt_group1.ticketreservationsystem.repositories.ConnectionRepository;
 import com.awt_group1.ticketreservationsystem.repositories.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class StationService {
 
     public StationService() { }
 
-    public List<Station> findAll() { return this.stationRepository.findAll(); }
+    public List<StationDTO> findAll() { return this.stationRepository.findAll().stream().map(StationDTO::new).collect(Collectors.toList()); }
 
-    public Optional<Station> getById(String id) { return this.stationRepository.findById(id); }
+    public StationDTO getById(String id) { return new StationDTO(this.stationRepository.findById(id)); }
 
     public void removeById(String id) { this.stationRepository.deleteById(id); }
 
@@ -28,7 +29,7 @@ public class StationService {
 
     public void updateStation(Station station) { this.stationRepository.save(station); }
 
-    public List<Station> getAllConnectionDestinationsForGivenOrigin(String originId) {
+    public List<StationDTO> getAllConnectionDestinationsForGivenOrigin(String originId) {
         return connectionRepository
                 .findAll()
                 .stream()
@@ -36,10 +37,11 @@ public class StationService {
                 .map(c -> stationRepository.findById(c.getStationByDestinationId().getStationId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .map(StationDTO::new)
                 .collect(Collectors.toList());
     }
 
-    public List<Station> getAllConnectionOriginsForGivenDestination(String destinationId) {
+    public List<StationDTO> getAllConnectionOriginsForGivenDestination(String destinationId) {
         return connectionRepository
                 .findAll()
                 .stream()
@@ -47,6 +49,7 @@ public class StationService {
                 .map(c -> stationRepository.findById(c.getStationByOriginId().getStationId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .map(StationDTO::new)
                 .collect(Collectors.toList());
     }
 }

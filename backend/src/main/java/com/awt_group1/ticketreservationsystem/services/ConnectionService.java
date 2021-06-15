@@ -1,6 +1,7 @@
 package com.awt_group1.ticketreservationsystem.services;
 
 import com.awt_group1.ticketreservationsystem.model.Connection;
+import com.awt_group1.ticketreservationsystem.model.ConnectionDTO;
 import com.awt_group1.ticketreservationsystem.repositories.ConnectionRepository;
 import com.awt_group1.ticketreservationsystem.repositories.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +20,25 @@ public class ConnectionService {
     public ConnectionService() {
     }
 
-    public List<Connection> findAll() {
-        return this.connectionRepository.findAll();
+    public List<ConnectionDTO> findAll() {
+        return this.connectionRepository.findAll().stream().map(ConnectionDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<Connection> findById(String id) {
-        return this.connectionRepository.findById(id);
+    public ConnectionDTO findById(String id) {
+        return new ConnectionDTO(this.connectionRepository.findById(id));
     }
 
     public void deleteById(String id) {
         this.connectionRepository.deleteById(id);
     }
 
-    public List<Connection> getAllConnectionFromTo(String fromId, String toId) {
+    public List<ConnectionDTO> getAllConnectionFromTo(String fromId, String toId) {
         return this.connectionRepository
                 .findAll()
                 .stream()
                 .filter(c -> c.getStationByOriginId().getStationId().equals(fromId)
                                 && c.getStationByDestinationId().getStationId().equals(toId))
+                .map(ConnectionDTO::new)
                 .collect(Collectors.toList());
     }
 }
