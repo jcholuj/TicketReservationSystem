@@ -17,6 +17,14 @@ public class Customer {
     private Person personByPersonId;
     private Collection<SalesOrder> salesOrdersByCustomerId;
 
+    public Customer(CustomerDTO customerDTO) {
+        this.customerId = customerDTO.getCustomerId();
+        this.ordersCount = customerDTO.getOrdersCount();
+        this.registrationDate = customerDTO.getRegistrationDate();
+        this.isActive = customerDTO.getIsActive();
+        this.isAdmin = customerDTO.getIsAdmin();
+    }
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")

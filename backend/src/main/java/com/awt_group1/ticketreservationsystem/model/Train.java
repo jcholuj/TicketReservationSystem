@@ -18,6 +18,15 @@ public class Train {
     private BigDecimal operationPrice;
     private Collection<Connection> connectionsByTrainId;
 
+    public Train(TrainDTO train) {
+        this.trainId = train.getTrainId();
+        this.model = train.getModel();
+        this.registerDate = train.getRegisterDate();
+        this.seatingCapacity = train.getSeatingCapacity();
+        this.operationSpeed = train.getOperationSpeed();
+        this.operationPrice = train.getOperationPrice();
+    }
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
