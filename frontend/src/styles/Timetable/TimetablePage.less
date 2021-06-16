@@ -1,0 +1,93 @@
+@import (reference) '../general/theme';
+
+.timetable-page {
+	.timetable-top-header {
+		background: none;
+		height: auto;
+
+		h2,
+		h3 {
+			color: @cyan-9;
+			margin: 0;
+		}
+
+		h4 {
+			color: rgba(0, 0, 0, 0.45);
+			padding: 30px 0 30px;
+			font-size: 18px;
+		}
+
+		.station-header-title {
+			padding: 0 30px;
+		}
+
+		hr {
+			height: 3px;
+			border: none;
+			background: @cyan-9;
+			margin: 11px 0;
+			width: calc(100% - 3px);
+			display: block;
+			z-index: 2;
+		}
+
+		img {
+			width: 24px;
+			display: block;
+			position: absolute;
+			user-select: none;
+			right: 0;
+			top: 0;
+			padding: inherit;
+			z-index: 1;
+		}
+	}
+
+	.timetable-list-header {
+		background: #fff;
+		border-top-left-radius: 30px;
+		border-top-right-radius: 30px;
+		height: auto;
+		padding-top: 25px;
+		box-shadow: @shadow-1-up;
+
+		.ant-divider {
+			margin: 10px 0 0;
+		}
+	}
+
+	.app-content {
+		padding: 0;
+		background: linear-gradient(to bottom, #fff, @lime-5 25%);
+	}
+
+	.timetable-wrapper {
+		background: none;
+
+		.timetable-inner {
+			background: #fff;
+			padding: 0 50px 30px;
+
+			.connection-list {
+				h5 {
+					margin: 0;
+				}
+
+				.entry-route {
+					margin: 0 18px;
+				}
+
+				.entry-train-num img {
+					width: 25px;
+					opacity: 0.6;
+				}
+
+				.entry-train-num .ant-typography,
+				.entry-route {
+					font-size: 15px;
+					color: #8c8c8c;
+				}
+			}
+		}
+	}
+}

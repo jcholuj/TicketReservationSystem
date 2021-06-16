@@ -9,6 +9,10 @@
 		img {
 			width: 270px;
 		}
+
+		button {
+			float: right;
+		}
 	}
 
 	.app-content {
@@ -31,6 +35,46 @@
 
 				> .ant-space {
 					width: 100%;
+				}
+
+				#general-form > img {
+					width: 65px;
+					margin: 5px 0;
+				}
+
+				#address-form > img {
+					width: 40px;
+					margin: 0 0 10px;
+				}
+
+				#security-form {
+					.dynamic-delete-button {
+						position: relative;
+						top: 4px;
+						margin: 0 8px;
+						color: #999;
+						font-size: 24px;
+						cursor: pointer;
+						transition: all 0.3s;
+
+						&:hover {
+							color: #777;
+						}
+					}
+
+					.ant-form-item-children-icon {
+						right: 20%;
+					}
+				}
+
+				.ant-radio-group img {
+					width: 25px;
+					margin: 4px 0;
+				}
+
+				.ant-radio-button-wrapper {
+					line-height: unset;
+					height: auto;
 				}
 			}
 		}

@@ -1,7 +1,18 @@
 import { Card } from 'antd';
 import React from 'react';
 
-const HocCard = (props) => {
+export const formItemLayout = {
+	labelCol: {
+		xs: { span: 24 },
+		sm: { span: 6 },
+	},
+	wrapperCol: {
+		xs: { span: 24 },
+		sm: { span: 18 },
+	},
+};
+
+const DefCard = (props) => {
 	return (
 		<Card size='small' title={props.title}>
 			{props.children}
@@ -9,4 +20,4 @@ const HocCard = (props) => {
 	);
 };
 
-export default HocCard;
+export default DefCard;

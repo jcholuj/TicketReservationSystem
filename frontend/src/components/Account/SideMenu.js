@@ -31,7 +31,7 @@ const SideMenu = (props) => {
 			defaultOpenKeys={['sub1']}
 			mode='inline'
 			onSelect={({ key }) => {
-				props.selectHandler(menuOptions[key]);
+				props.selectHandler(key, menuOptions[key]);
 			}}
 		>
 			<SubMenu key='sub1' icon={<UserOutlined />} title='My Account'>

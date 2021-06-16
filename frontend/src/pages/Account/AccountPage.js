@@ -8,6 +8,7 @@ import {
 	Space,
 	Tooltip,
 	Typography,
+	Divider,
 } from 'antd';
 import { PoweroffOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 
@@ -17,6 +18,7 @@ import AppBreadcrumb from '../../components/general/AppBreadcrumb';
 
 import '../../styles/Account/AccountPage.less';
 import headerImg from '../../static/account_img.svg';
+import ContentPane from '../../components/Account/ContentPane';
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
@@ -43,11 +45,16 @@ class AccountPage extends Component {
 		this.state = {
 			activeTitle: 'Your data',
 			activeTooltip: 'Secured customer profile',
+			activeMenuKey: '1',
 		};
 	}
 
-	handleMenuSelect = ({ title, tooltip }) => {
-		this.setState({ activeTitle: title, activeTooltip: tooltip });
+	handleMenuSelect = (key, { title, tooltip }) => {
+		this.setState({
+			activeTitle: title,
+			activeTooltip: tooltip,
+			activeMenuKey: key,
+		});
 	};
 
 	render() {
@@ -70,7 +77,12 @@ class AccountPage extends Component {
 					<Content className='account-wrapper'>
 						<AppBreadcrumb page={{ name: 'Account', link: '/account' }} />
 						<Layout className='inner'>
-							<Sider breakpoint='md' collapsedWidth='0' width={300}>
+							<Sider
+								style={{ backgroundColor: '#fff' }}
+								breakpoint='md'
+								collapsedWidth='0'
+								width={300}
+							>
 								<SideMenu selectHandler={this.handleMenuSelect} />
 							</Sider>
 							<Content className='inner-content'>
@@ -83,6 +95,8 @@ class AccountPage extends Component {
 											<QuestionCircleOutlined />
 										</Tooltip>
 									</Space>
+									<Divider />
+									<ContentPane paneKey={this.state.activeMenuKey} />
 								</Space>
 							</Content>
 						</Layout>
