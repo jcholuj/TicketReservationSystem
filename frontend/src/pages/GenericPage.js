@@ -11,7 +11,7 @@ const GenericPage = ({ children, ...props }) => {
 			<Helmet>
 				<title>Trainy - {props.title}</title>
 			</Helmet>
-			<Layout className={props.className} style={props.topLayoutStyle}>
+			<Layout className={props.className}>
 				<AppTopHeader selectedKey={props.headerActiveTab} />
 				{children}
 				<AppFooter />

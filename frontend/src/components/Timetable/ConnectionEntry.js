@@ -43,8 +43,8 @@ const ConnectionEntry = (props) => {
 					</Col>
 					<Col span={3}>
 						<Space>
-							<ClockCircleOutlined />
 							<Text className='entry-duration'>4:35</Text>
+							<ClockCircleOutlined />
 						</Space>
 					</Col>
 					<Col span={6}>

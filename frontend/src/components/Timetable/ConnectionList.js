@@ -5,11 +5,10 @@ import { CaretDownOutlined } from '@ant-design/icons';
 import reqwest from 'reqwest';
 import ConnectionEntry from './ConnectionEntry';
 
-const count = 3;
+const count = 20;
 const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
 
 class ConnectionList extends Component {
-
 	state = {
 		initLoading: true,
 		loading: false,
@@ -81,7 +80,7 @@ class ConnectionList extends Component {
 
 		return (
 			<List
-				className='connection-list'
+				className='timetable-list'
 				loading={initLoading}
 				itemLayout='horizontal'
 				size='small'

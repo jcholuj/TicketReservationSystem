@@ -1,5 +1,5 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Divider, Layout, Row } from 'antd';
+import { Button, Col, DatePicker, Divider, Layout, Popover, Row } from 'antd';
 import React, { Component } from 'react';
 import AppBreadcrumb from '../../components/general/AppBreadcrumb';
 import ConnectionList from '../../components/Timetable/ConnectionList';
@@ -7,8 +7,11 @@ import Topheader from '../../components/Timetable/TopHeader';
 import GenericPage from '../GenericPage';
 
 import '../../styles/Timetable/TimetablePage.less';
+import Toolbar from '../../components/Timetable/Toolbar';
+import NewSearchForm from '../../components/Timetable/NewSearchForm';
 
 const { Header, Content } = Layout;
+const dateTimeFormat = 'DD.MM.YYYY';
 
 class TimetablePage extends Component {
 	state = {};
@@ -30,22 +33,34 @@ class TimetablePage extends Component {
 									/>
 								</Col>
 								<Col>
-									<Button
-										size='small'
-										shape='round'
-										type='link'
-										icon={<SearchOutlined />}
-										style={{ display: 'block' }}
+									<Popover
+										placement='bottom'
+										content={<NewSearchForm />}
+										trigger='click'
 									>
-										New search
-									</Button>
+										<Button
+											size='small'
+											shape='round'
+											type='link'
+											icon={<SearchOutlined />}
+											style={{ display: 'block' }}
+										>
+											New search
+										</Button>
+									</Popover>
 								</Col>
 								<Col>
-									<DatePicker style={{ display: 'flex' }} size='large' />
+									<DatePicker
+										format={dateTimeFormat}
+										style={{ display: 'flex' }}
+										size='large'
+									/>
 								</Col>
 							</Row>
 							<Row>
-								<Col></Col>
+								<Col>
+									<Toolbar />
+								</Col>
 							</Row>
 							<Divider />
 						</Header>

@@ -1,74 +1,191 @@
 @import (reference) '../general/theme';
 
 .timetable-page {
+	background: none;
+
 	.timetable-top-header {
-		background: none;
+		position: -webkit-sticky;
+		position: sticky;
+		top: 64px;
+		z-index: 2;
 		height: auto;
+		padding: 0 50px 30px;
+		background: linear-gradient(to bottom, #fff, @lime-5 50%);
+		background-size: auto 300px;
+		max-height: 300px;
+		transition: max-height 0.5s ease;
 
-		h2,
-		h3 {
-			color: @cyan-9;
-			margin: 0;
+		&.scrolled {
+			max-height: 112px;
+
+			.arrow {
+				padding: 28px 0 2px;
+				flex: 0 0 20%;
+
+				svg:nth-child(2) {
+					top: 28px;
+				}
+			}
+
+			.header-station-title h2 {
+				font-size: 25px;
+			}
+
+			.header-meta {
+				opacity: 0;
+			}
 		}
 
-		h4 {
-			color: rgba(0, 0, 0, 0.45);
-			padding: 30px 0 30px;
-			font-size: 18px;
-		}
-
-		.station-header-title {
+		.header-station-title {
 			padding: 0 30px;
+
+			h2,
+			h3 {
+				color: @cyan-9;
+				margin: 0;
+				transition: font-size 0.5s @ease-in-out;
+			}
 		}
 
-		hr {
-			height: 3px;
-			border: none;
-			background: @cyan-9;
-			margin: 11px 0;
-			width: calc(100% - 3px);
-			display: block;
-			z-index: 2;
+		.header-meta {
+			color: rgba(0, 0, 0, 0.45);
+			padding: 25px 0 30px;
+			font-size: 18px;
+			margin: 0;
+			opacity: 1;
+			transition: opacity 0.5s @ease-in-out;
 		}
 
-		img {
-			width: 24px;
-			display: block;
-			position: absolute;
-			user-select: none;
-			right: 0;
-			top: 0;
-			padding: inherit;
-			z-index: 1;
+		.arrow {
+			padding: 50px 0 5px;
+			flex: 1 1 auto;
+			transition: padding 0.5s @ease-in-out, flex 0.5s @ease-in-out;
+
+			svg {
+				display: block;
+
+				&:nth-child(2) {
+					width: 25px;
+					height: 25px;
+					position: absolute;
+					right: 0;
+					z-index: -1;
+					transition: top 0.5s @ease-in-out;
+					top: 50px;
+				}
+
+				&:nth-child(1) {
+					width: calc(100% - 3px);
+					height: 25px;
+				}
+			}
 		}
-	}
-
-	.timetable-list-header {
-		background: #fff;
-		border-top-left-radius: 30px;
-		border-top-right-radius: 30px;
-		height: auto;
-		padding-top: 25px;
-		box-shadow: @shadow-1-up;
-
-		.ant-divider {
-			margin: 10px 0 0;
-		}
-	}
-
-	.app-content {
-		padding: 0;
-		background: linear-gradient(to bottom, #fff, @lime-5 25%);
 	}
 
 	.timetable-wrapper {
 		background: none;
+		margin-top: -30px;
+
+		.timetable-list-header {
+			background: #fff;
+			border-top-left-radius: 30px;
+			border-top-right-radius: 30px;
+			height: auto;
+			padding-top: 25px;
+			box-shadow: @shadow-1-up;
+			position: -webkit-sticky;
+			position: sticky;
+			top: 146px;
+			z-index: 5;
+			clip-path: inset(-60px 0px 0 0);
+
+			.ant-btn-link {
+				color: @cyan-8;
+
+				&:active {
+					color: @cyan-9;
+				}
+			}
+
+			.ant-divider {
+				margin: 10px 0 0;
+			}
+
+			.timetable-toolbar {
+				display: flex;
+				margin: 8px 0 2px;
+				user-select: none;
+
+				.ant-radio-group,
+				.dropdown {
+					line-height: initial;
+					display: block;
+				}
+
+				.dropdown {
+					color: @cyan-8;
+
+					&:active {
+						color: @cyan-9;
+					}
+				}
+
+				.ant-radio-group {
+					.ant-radio-button-wrapper:hover {
+						color: @cyan-8;
+					}
+
+					.ant-radio-button-wrapper-checked {
+						background: @cyan-8;
+						border-color: @cyan-8;
+
+						&:hover {
+							color: #fff;
+						}
+
+						&::before {
+							background-color: @cyan-8;
+						}
+
+						&:active {
+							background: @cyan-9;
+							border-color: @cyan-9;
+						}
+
+						&:focus-within {
+							box-shadow: 0 0 0 3px rgba(0, 109, 117, 0.08);
+						}
+
+						&:first-child {
+							border-right-color: @cyan-7;
+						}
+					}
+				}
+				.ant-select {
+					display: block;
+					min-width: 180px;
+
+					&.ant-select-focused .ant-select-selector {
+						box-shadow: 0 0 2px rgba(0, 109, 117, 0.2);
+					}
+
+					&:hover .ant-select-selector {
+						border-color: @cyan-7;
+					}
+
+					&.ant-select-focused .ant-select-selector {
+						border-color: @cyan-7;
+					}
+				}
+			}
+		}
 
 		.timetable-inner {
 			background: #fff;
 			padding: 0 50px 30px;
+			z-index: 1;
 
-			.connection-list {
+			.timetable-list {
 				h5 {
 					margin: 0;
 				}
@@ -89,5 +206,25 @@
 				}
 			}
 		}
+	}
+
+	.app-content {
+		padding: 0;
+		background: none;
+	}
+}
+
+#new-search {
+	.ant-form-item {
+		&:nth-child(1) {
+			margin-bottom: 8px;
+		}
+		&:nth-child(2) {
+			margin-bottom: 20px;
+		}
+	}
+
+	.new-search-submit {
+		margin-bottom: 10px;
 	}
 }
