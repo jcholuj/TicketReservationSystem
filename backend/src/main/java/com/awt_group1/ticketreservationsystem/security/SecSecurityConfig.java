@@ -38,11 +38,11 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                         HttpMethod.GET,
                         "/", "/index*", "/static/**", "/*.json", "/*.js", "/icons/**")
                 .permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/index.html")
-                .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/homepage.html", true)
-                .failureUrl("/index.html?error=true");
+                .anyRequest().authenticated();
+//                .and()
+//                .formLogin().loginPage("/index.html")
+//                .loginProcessingUrl("/perform_login")
+//                .defaultSuccessUrl("/homepage.html", true)
+//                .failureUrl("/index.html?error=true");
     }
 }

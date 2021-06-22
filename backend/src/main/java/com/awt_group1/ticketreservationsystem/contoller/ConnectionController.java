@@ -35,7 +35,3 @@ public class ConnectionController {
         return connectionService.getAllConnectionFromTo(originId, destinationId);
     }
 }
-
-//http://localhost:8080/api/connection/between?originId=7e2958fd-cd6a-11eb-9292-06fa80fd6ae2&destinationId=7e295c99-cd6a-11eb-9292-06fa80fd6ae2
-//
-//        7e295397-cd6a-11eb-9292-06fa80fd6ae2
